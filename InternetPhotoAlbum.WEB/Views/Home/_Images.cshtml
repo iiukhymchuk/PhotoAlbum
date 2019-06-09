@@ -1,0 +1,58 @@
+﻿@using InternetPhotoAlbum.WEB.Models;
+@model HomeIndexViewModel
+
+
+<div id="image-results">
+    @if (Model.ImagesWithAvatars == null || Model.ImagesWithAvatars.Count() == 0)
+    {
+        <h3 class="text-error">Нет картинок</h3>
+    }
+    else
+    {
+        <h3>Картинки</h3>
+        foreach (Tuple<ImageViewModel, ImageViewModel> avatarImageTuple in Model.ImagesWithAvatars)
+        {
+            var userPath = @Url.Content("~/UserSpace/Index/" + @avatarImageTuple.Item1.Name);
+            var avatarPath = @Url.Content("~/Content/Images/Avatars/Resized/" + avatarImageTuple.Item1.FileStoreName);
+            <div class="row">
+                <div class="col-xs-2">
+                    <a href="@userPath">
+                        <div class="circle-small-avatar-div">
+                            <div class="circle-avatar" style="background-image:url(@avatarPath)"></div>
+                        </div>
+                        <div class="nickname">@avatarImageTuple.Item1.Description</div>
+                    </a>
+                </div>
+                <div class="col-xs-9">
+                    @Html.ImagePost("~/Content/Images/Resized/" + avatarImageTuple.Item2.FileStoreName,
+                                              avatarImageTuple.Item2.Name, avatarImageTuple.Item2.Description)
+                </div>
+                <div class="col-xs-1">
+                    @if (@User.IsInRole("Admin") || @Model.UserSpaceId == @avatarImageTuple.Item1.Name)
+                    {
+                        using (Html.BeginForm("DeleteImage", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" value="@avatarImageTuple.Item2.FileStoreName" name="imageStoreName" />
+                            <button type="submit" value="" class="btn btn-default" title="Удалить">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        }
+                    }
+                    @if (@User.Identity.IsAuthenticated || @Model.UserSpaceId == @avatarImageTuple.Item1.Name)
+                    {
+                        using (Html.BeginForm("DownloadImage", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" value="@avatarImageTuple.Item2.FileStoreName" name="imageStoreName" />
+                            <button type="submit" value="" class="btn btn-default" title="Загрузить">
+                                <span class="glyphicon glyphicon-download-alt"></span>
+                            </button>
+                        }
+                    }
+                </div>
+            </div>
+            <br />
+        }
+    }
+</div>

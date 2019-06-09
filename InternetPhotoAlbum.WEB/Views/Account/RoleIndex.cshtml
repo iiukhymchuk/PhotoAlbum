@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RoleIndex</title>
+</head>
+<body>
+
+    
+    <div>
+        <br/>
+        <div class="spacerBody">
+            @Html.ActionLink("В свой кабинет", "Index", "Manage") | @Html.ActionLink("Создать роль", "RoleCreate") | @Html.ActionLink("Добавить роль для пользователя", "RoleAddToUser")
+            <br />
+            <h2>Перечень ролей</h2>
+            @foreach (string s in Model)
+            {
+                <p>
+                    @s
+                    <span onclick=" return confirm('Уверены в удалении?') ">
+                        <a href="/Account/RoleDelete?RoleName=@s" class="delLink">Удалить</a>
+                    </span>
+                </p>
+            }
+        </div>
+    </div>
+</body>
+</html>

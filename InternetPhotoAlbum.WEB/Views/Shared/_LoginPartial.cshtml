@@ -1,0 +1,42 @@
+﻿@using InternetPhotoAlbum.WEB.Models;
+@model SharedLayoutViewModel
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="@Url.Action("Index", "Manage")" title="Manage">
+                    <span class="glyphicon glyphicon-user" />
+                    @Model.UserNickName
+                </a>
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <span class="glyphicon glyphicon-log-out" />
+                    Выход
+                </a>
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="@Url.Action("Register", "Account")" id="registerLink">
+                <span class="glyphicon glyphicon-user" />
+                Регистрация
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Login", "Account")" id="loginLink">
+                <span class="glyphicon glyphicon-log-in" />
+                Вход
+            </a>
+        </li>
+    </ul>
+}

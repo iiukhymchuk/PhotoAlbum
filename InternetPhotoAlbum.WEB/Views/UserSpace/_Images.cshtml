@@ -1,0 +1,46 @@
+﻿@using InternetPhotoAlbum.WEB.Models;
+@model UserSpaceIndexViewModel
+
+<div id="image-results">
+    @if (Model.ImagesOfThePage == null || Model.ImagesOfThePage.Count() == 0)
+    {
+        <h4 class="text-error">Картинок нет</h4>
+    }
+    else
+    {
+        <h4>Картинки пользователя @Model.Avatar.Description</h4>
+        foreach (ImageViewModel image in Model.ImagesOfThePage)
+        {
+            <div class="col-xs-11">
+                @Html.ImagePost("~/Content/Images/Resized/" + image.FileStoreName, image.Name, image.Description)
+            </div>
+
+            <div class="col-xs-1">
+                @if (@Model.CurrentPageSpaceId == @Model.UserSpaceId || @User.IsInRole("Admin"))
+                {
+                    using (Html.BeginForm("DeleteImage", "UserSpace", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" value="@image.FileStoreName" name="imageStoreName" />
+                        <button type="submit" value="" class="btn btn-default" title="Удалить">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    }
+                }
+                @if (@User.Identity.IsAuthenticated)
+                {
+                    using (Html.BeginForm("DownloadImage", "UserSpace", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" value="@image.FileStoreName" name="imageStoreName" />
+                        <button type="submit" value="" class="btn btn-default" title="Загрузить">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                        </button>
+                    }
+                }
+            </div>
+
+            <br />
+        }
+    }
+</div>

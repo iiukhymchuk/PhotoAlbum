@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RoleCreate</title>
+</head>
+<body>
+    <div> 
+        <div class="spacerBody">
+
+            <br />
+            @Html.ActionLink("В свой кабинет", "Index", "Manage") | @Html.ActionLink("Роли", "RoleIndex") | @Html.ActionLink("Добавить роль для пользователя", "RoleAddToUser")
+            <br />
+
+            <h2>Создать роль</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div>
+                    Имя роли
+                </div>
+                <p>
+                    @Html.TextBox("RoleName")
+                </p>
+                <input type="submit" value="Сохранить" />
+            }
+        </div>
+    </div>
+</body>
+</html>

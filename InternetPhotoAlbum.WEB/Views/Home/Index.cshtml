@@ -1,0 +1,22 @@
+﻿@using InternetPhotoAlbum.WEB.Models;
+@model HomeIndexViewModel
+
+@{
+    ViewBag.Title = "Photo Album";
+}
+
+
+
+<div class="jumbotron">
+    <h1>Photo Album</h1>
+    <p class="lead">Лучшее место, чтобы делится своими картинками с миром</p>
+</div>
+
+<div class="search-results" id="search-results">
+    @{ Html.RenderPartial("_Images", @Model); }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryunobtrusiveajax")
+}

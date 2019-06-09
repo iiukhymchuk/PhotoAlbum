@@ -1,0 +1,16 @@
+﻿@using InternetPhotoAlbum.WEB.Models;
+@model ImageViewModel
+
+@{
+    var path = @Url.Content("~/Content/Images/Avatars/Resized/" + @Model.FileStoreName);
+}
+@*<div class="circle-avatar-div">
+        @Html.Image("~/Content/Images/Avatars/Resized/" + @Model.FileStoreName,
+                        @Model.Name,
+                        new { @class = "img-responsive image-avatar img-circle" })
+    </div>*@
+
+
+<div class="circle-avatar" style="background-image:url(@path)"></div>
+
+

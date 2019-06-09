@@ -1,0 +1,53 @@
+﻿@model InternetPhotoAlbum.WEB.Models.ChangeNickNameViewModel
+
+@{
+    ViewBag.Title = "ChangeNickName";
+}
+
+<h3>Измените имя пользователя</h3>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OldPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OldPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OldPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewNickName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NewNickName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NewNickName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Изменить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("В мой кабинет", "Index")
+</p>
+<p>
+    @Html.ActionLink("Изменить пароль", "ChangePassword")
+</p>
+<p>
+    @Html.ActionLink("Изменить аватар", "SetAvatar")
+</p>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

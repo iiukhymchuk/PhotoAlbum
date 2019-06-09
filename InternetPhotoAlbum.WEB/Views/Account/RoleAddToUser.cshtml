@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RoleAddToUser</title>
+</head>
+<body>
+    <div> 
+        <div class="spacerBody">
+            <br />
+            @Html.ActionLink("В свой кабинет", "Index", "Manage") | @Html.ActionLink("Создать новую роль", "RoleCreate") | @Html.ActionLink("Роли", "RoleIndex")
+            <br />
+
+            <h2>Добавить роль пользователю</h2>
+            @using (Html.BeginForm("RoleAddToUser", "Account"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="message-success">@ViewBag.ResultMessage</div>
+                <p>
+                    Пользователь : @Html.DropDownList("UserName", ViewBag.Users as SelectList)
+                    Имя роли : @Html.DropDownList("RoleName", ViewBag.Roles as SelectList)
+                </p>
+
+                <input type="submit" value="Сохранить" />
+            }
+
+            <br />
+            <h2>Удалить роль пользователя</h2>
+            @using (Html.BeginForm("DeleteRoleForUser", "Account"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <p>
+                    Пользователь : @Html.DropDownList("UserName", ViewBag.Users as SelectList)
+                    Имя роли : @Html.DropDownList("RoleName", ViewBag.Roles as SelectList)
+                </p>
+
+                <input type="submit" value="Удалить эту роль пользователя" />
+            }
+
+            <br />
+            <h2>Список ролей пользователя</h2>
+            @using (Html.BeginForm("GetRoles", "Account"))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    Пользователь : @Html.DropDownList("UserName", ViewBag.Users as SelectList)
+                    <input type="submit" value="Извлечь список ролей" />
+                </p>
+            }
+
+            @if (ViewBag.RolesForThisUser != null)
+            {
+                <text>
+                    <h3>Роли пользователя </h3>
+                    <ol>
+                        @foreach (string s in ViewBag.RolesForThisUser)
+                        {
+                            <li>@s</li>
+                        }
+                    </ol>
+                </text>
+            }
+        </div>
+    </div>
+</body>
+</html>

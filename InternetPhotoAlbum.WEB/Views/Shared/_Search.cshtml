@@ -1,0 +1,26 @@
+﻿@using InternetPhotoAlbum.WEB.Models;
+@model SharedLayoutViewModel
+
+@if (@Model.CurrentController != null 
+    && @Model.CurrentController.Equals("Home", StringComparison.InvariantCultureIgnoreCase)
+    || @Model.CurrentController.Equals("UserSpace", StringComparison.InvariantCultureIgnoreCase))
+{
+
+    using (Ajax.BeginForm("Search", @Model.CurrentController.ToString(), 
+        new 
+        {id = @Model.CurrentPageSpaceId },
+        new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "POST",
+            UpdateTargetId = "search-results"
+        },
+        new { @class = "navbar-form navbar-left", role = "search" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.SearchString, new { @class = "form-control", @placeholder = "Поиск" })
+        </div>
+        <button type="submit" value="Search" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+    }
+}

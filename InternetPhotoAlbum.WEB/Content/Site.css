@@ -1,0 +1,118 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+textarea.textarea-description {
+    height: 150px;
+    resize: none;
+}
+
+
+img.image-avatar {
+    max-width: 100%;
+    max-height: 100%;
+    margin:0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+div.div-image-post {
+    max-width:800px;
+    width: 100%;
+    margin:0 auto;
+    border: 1px solid grey;
+    text-align: center;
+    display: block;
+
+    padding: 1px;
+
+    opacity: 0.96;
+	filter: alpha(opacity=96);
+}
+
+div.div-image-post:hover {
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+
+    opacity: 1;
+	filter: alpha(opacity=100);
+
+    padding-right: 1px;
+}
+
+/* Сделать картинки круглыми и responsive*/
+div.circle-big-avatar-div {
+    max-width: 200px;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+div.circle-mid-avatar-div {
+    max-width: 150px;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+div.circle-small-avatar-div {
+    max-width: 100px;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+div.circle-avatar{
+    max-width: 100%;
+    width:100%;
+    height:auto;
+    /* Тут мы делаем так чтобы div не схлопывался*/
+    padding-top:100%;
+    
+    border-radius:50%;
+    display:block;
+    background-position-y: center;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div.circle-avatar:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+div.nickname {
+    text-align: center;
+}

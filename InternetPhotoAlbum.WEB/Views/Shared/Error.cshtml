@@ -1,0 +1,18 @@
+﻿@model InternetPhotoAlbum.WEB.Models.SharedLayoutViewModel
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1 class="text-danger">Ошибка</h1>
+@{
+    if (String.IsNullOrEmpty(ViewBag.errorMessage))
+    {
+        <h2 class="text-danger">Возникла ошибка при обработке запроса</h2>
+    }
+    else
+    {
+        <h2 class="text-danger">@ViewBag.errorMessage</h2>
+    }
+}
+
